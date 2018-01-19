@@ -166,7 +166,7 @@ int main(int argc, char **argv)
     head.name = "head";
     head.description = "List head. Should not be visible at all.";
 
-    //print_available_tests(stdout);
+    print_available_tests(stdout);
 
     res |= register_test_ptrace(&head, test_bmp);
     res |= register_test_vdso(&head, test_bmp);
@@ -182,8 +182,8 @@ int main(int argc, char **argv)
         return -1;
     }
 
-    //printf("Use a hexadecimal value representing a bitmap to select tests "
-    //                            "in argv[1] (default %#x).\n\n", UINT_MAX);
+    printf("Use a hexadecimal value representing a bitmap to select tests "
+                                "in argv[1] (default %#x).\n\n", UINT_MAX);
 
     puts("Test results:");
     puts("-------------");
