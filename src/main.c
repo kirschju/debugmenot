@@ -13,6 +13,7 @@
 #include "test_noaslr.h"
 #include "test_parent.h"
 #include "test_ldhook.h"
+#include "test_nearheap.h"
 
 unsigned int this_arch = UINT_MAX;
 
@@ -108,12 +109,13 @@ static void print_available_tests(FILE *fp) {
     fprintf(fp, "----------------\n\n");
 
     const char *tests[TEST_ID_MAX][2] = {
-        [TEST_ID_ENV] = { TEST_NAME_ENV, TEST_DESC_ENV },
-        [TEST_ID_PTRACE] = { TEST_NAME_PTRACE, TEST_DESC_PTRACE },
-        [TEST_ID_VDSO]   = { TEST_NAME_VDSO, TEST_DESC_VDSO },
-        [TEST_ID_NOASLR] = { TEST_NAME_NOASLR, TEST_DESC_NOASLR },
-        [TEST_ID_PARENT] = { TEST_NAME_PARENT, TEST_DESC_PARENT },
-        [TEST_ID_LDHOOK] = { TEST_NAME_LDHOOK, TEST_DESC_LDHOOK },
+        [TEST_ID_ENV]      = { TEST_NAME_ENV, TEST_DESC_ENV },
+        [TEST_ID_PTRACE]   = { TEST_NAME_PTRACE, TEST_DESC_PTRACE },
+        [TEST_ID_VDSO]     = { TEST_NAME_VDSO, TEST_DESC_VDSO },
+        [TEST_ID_NOASLR]   = { TEST_NAME_NOASLR, TEST_DESC_NOASLR },
+        [TEST_ID_PARENT]   = { TEST_NAME_PARENT, TEST_DESC_PARENT },
+        [TEST_ID_LDHOOK]   = { TEST_NAME_LDHOOK, TEST_DESC_LDHOOK },
+        [TEST_ID_NEARHEAP] = { TEST_NAME_NEARHEAP, TEST_DESC_NEARHEAP },
     };
 
     for (i = 0; i < TEST_ID_MAX; j = 0, i++) {
@@ -174,6 +176,7 @@ int main(int argc, char **argv)
     res |= register_test_env(&head, test_bmp);
     res |= register_test_parent(&head, test_bmp);
     res |= register_test_ldhook(&head, test_bmp);
+    res |= register_test_nearheap(&head, test_bmp);
 
     if (res) {
         fprintf(stderr, "Failed to register one or more tests (bmp = %#018x)."
